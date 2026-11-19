@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .selesai { text-decoration: line-through; color: gray;}
+    </style>
+
+</head>
+<body>
+    <h2>Daftar Tugas</h2>
+    <input type="text" id="Tugas" placeholder="tulis tugas...">
+    <button onclick="tambahTugas()">Tambah</button>
+
+    <ul id="daftar"></ul> 
+     
+   
+    <script>
+        let daftarTugas = [];
+
+        function tambahTugas() {
+        let input = document.getElementById("Tugas");
+
+        if (input.value === "") {
+            return;
+        }
+
+        daftarTugas.push ({ judul: input.value, selesai: false });
+        input.value ="";
+        tampilkan();
+        }
+
+        
+        function tandaiSelesai (index) {
+            daftarTugas[index].selesai = !daftarTugas[index].selesai;
+            tampilkan();
+        }
+
+        function hapusTugas(index) {
+            daftarTugas.splice(index, l);
+            tampilkan();
+        }
+
+    
+        function tampilkan() {
+            let html = "";
+
+            for (let i = 0; i < daftarTugas.length; i++) {
+                let kelas = "";
+                if (daftarTugas[i].selesai) {
+                    kelas = "selesai";
+                }
+
+                html += "<li class='" + kelas + "'>" + daftarTugas[i].judul +
+                    "<button onclick='tandaiSelesai(" + i +")'>selesai</button>" +
+                    "<button onclick='hapusTugas(" + i +")'>Hapus</button></li>";
+            }
+            document.getElementById("daftar").innerHTML = html;
+        }
+        
+    </script>
+    
+</body>
+</html>
